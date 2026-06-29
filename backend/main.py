@@ -96,11 +96,10 @@ def map_difficulty_to_float(label: str) -> float:
 # --- USER/AUTH ROUTES ---
 # ====================================================================
 
-@app.post("/login", response_model=schemas.Token)
-def login_for_access_token(
-    form_data: OAuth2PasswordRequestForm = Depends(), 
-    db: Session = Depends(get_db)
-):
+
+@app.post("/login", include_in_schema=False) # Handles /login
+@app.post("/login/")                         # Handles /login/
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     """Handles user login and issues a JWT access token."""
     user = security.authenticate_user(db, form_data.username, form_data.password)
     
