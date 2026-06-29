@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Card, Alert } from 'react-bootstrap';
 import axios from 'axios';
-
+const API_BASE_URL = process.env.REACT_APP_API_URL
 const Login = ({ switchToSignup, setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ const Login = ({ switchToSignup, setUser }) => {
 
     try {
       const response = await axios.post(
-        'http://localhost:8000/login/',
+        '${API_BASE_URL}/login/',
         new URLSearchParams({
           username: email,
           password: password,

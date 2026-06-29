@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Container, Form, Button, Alert, Spinner } from 'react-bootstrap';
 import axios from 'axios';
-
+const API_BASE_URL = process.env.REACT_APP_API_URL
 const ScenarioQuestion = ({ question, onNextQuestion }) => {
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ const ScenarioQuestion = ({ question, onNextQuestion }) => {
 
       try {
         const response = await axios.post(
-          `http://localhost:8000/questions/${question.id}/answer`,
+          `${API_BASE_URL}/${question.id}/answer`,
           { answer: answer },
           {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }

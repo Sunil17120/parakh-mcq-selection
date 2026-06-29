@@ -20,7 +20,7 @@ function App() {
   
   // State to manage the current view: 'quiz', 'dashboard', or 'admin_dashboard'
   const [currentView, setCurrentView] = useState('quiz'); 
-
+const API_BASE_URL = process.env.REACT_APP_API_URL
   // 1. Fetch User Data on Load
   useEffect(() => {
     const fetchUser = async () => {
@@ -30,7 +30,7 @@ function App() {
           const config = {
             headers: { 'Authorization': `Bearer ${token}` }
           };
-          const response = await axios.get('http://localhost:8000/users/me', config);
+          const response = await axios.get('${API_BASE_URL}/users/me', config);
           const userData = response.data;
           setUser(userData);
           
@@ -80,7 +80,7 @@ function App() {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       };
       // Pass the correct_mcq_count to help the IRT/Adaptive logic if needed
-      const response = await axios.get(`http://localhost:8000/questions/next?correct_mcq_count=${correctAnswersCount}`, config);
+      const response = await axios.get(`${API_BASE_URL}/questions/next?correct_mcq_count=${correctAnswersCount}`, config);
       setQuestion(response.data);
     } catch (err) {
       console.error("Failed to fetch question:", err);

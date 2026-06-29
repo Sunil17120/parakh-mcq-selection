@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Table, Spinner, Alert, Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
-
+const API_BASE_URL = process.env.REACT_APP_API_URL
 const AdminDashboard = () => {
   // --- Stats State ---
   const [stats, setStats] = useState(null);
@@ -28,7 +28,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { 'Authorization': `Bearer ${token}` } };
-      const response = await axios.get('http://localhost:8000/admin/stats', config);
+      const response = await axios.get('${API_BASE_URL}/admin/stats', config);
       setStats(response.data);
     } catch (err) {
       console.error("Fetch Stats Error:", err);
@@ -62,7 +62,7 @@ const AdminDashboard = () => {
       
       // Send topic and num_questions=250 as query parameters to the POST endpoint
       const response = await axios.post(
-        `http://localhost:8000/admin/generate-questions?topic=${encodeURIComponent(topic)}&num_questions=10`, 
+        `${API_BASE_URL}/admin/generate-questions?topic=${encodeURIComponent(topic)}&num_questions=10`, 
         {}, // Empty body
         config
       );

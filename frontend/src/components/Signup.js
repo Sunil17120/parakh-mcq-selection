@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Card, Alert } from 'react-bootstrap';
 import axios from 'axios';
-
+const API_BASE_URL = process.env.REACT_APP_API_URL
 const Signup = ({ switchToLogin }) => {
   const [formData, setFormData] = useState({
     full_name: '',
@@ -26,7 +26,7 @@ const Signup = ({ switchToLogin }) => {
     setSuccess('');
 
     try {
-      await axios.post('http://localhost:8000/signup/', formData);
+      await axios.post('${API_BASE_URL}/signup/', formData);
       setSuccess('Signup successful! You can now log in.');
       setTimeout(switchToLogin, 2000);
     } catch (err) {

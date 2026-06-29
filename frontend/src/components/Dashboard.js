@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Table, ProgressBar, Spinner, Alert } from 'react-bootstrap';
 import axios from 'axios';
-
+const API_BASE_URL = process.env.REACT_APP_API_URL
 const ProgressDashboard = () => {
   const [progress, setProgress] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const ProgressDashboard = () => {
         const config = {
           headers: { 'Authorization': `Bearer ${token}` }
         };
-        const response = await axios.get('http://localhost:8000/users/progress', config);
+        const response = await axios.get('${API_BASE_URL}/users/progress', config);
         setProgress(response.data);
         setLoading(false);
       } catch (err) {
