@@ -1,0 +1,28 @@
+# Use the official lightweight Python image
+FROM python:3.11-slim
+
+# 1. Hugging Face Requirement: Create a non-root user
+RUN useradd -m -u 1000 user
+USER user
+
+# 2. Add the local user bin to the PATH
+ENV PATH="/home/user/.local/bin:$PATH"
+
+# 3. Set the working directory
+WORKDIR /app
+
+# 4. Target the backend folder for requirements (Optimized caching)
+COPY --chown=user backend/requirements.txt .
+
+# 5. Install dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# 6. Copy ONLY the backend logic into the container
+COPY --chown=user backend/ .
+
+# 7. Expose the specific port Hugging Face requires
+EXPOSE 7860
+
+# 8. Run the FastAPI application strictly on port 7860
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
