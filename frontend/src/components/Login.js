@@ -15,7 +15,7 @@ const Login = ({ switchToSignup, setUser }) => {
 
     try {
       const response = await axios.post(
-        '${API_BASE_URL}/login/',
+        '${API_BASE_URL}/login',
         new URLSearchParams({
           username: email,
           password: password,
@@ -28,7 +28,7 @@ const Login = ({ switchToSignup, setUser }) => {
       const { access_token } = response.data;
       localStorage.setItem('token', access_token);
       
-      const userResponse = await axios.get('http://localhost:8000/users/me', {
+      const userResponse = await axios.get('${API_BASE_URL}/users/me', {
         headers: { 'Authorization': `Bearer ${access_token}` },
       });
       // The setUser function from App.js is now called with the user data
