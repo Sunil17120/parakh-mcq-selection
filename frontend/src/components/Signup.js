@@ -26,7 +26,7 @@ const Signup = ({ switchToLogin }) => {
     setSuccess('');
 
     try {
-      await axios.post('${API_BASE_URL}/signup/', formData);
+      await axios.post(`${API_BASE_URL}/signup/`, formData);
       setSuccess('Signup successful! You can now log in.');
       setTimeout(switchToLogin, 2000);
     } catch (err) {

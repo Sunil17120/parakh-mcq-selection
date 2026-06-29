@@ -14,7 +14,7 @@ const ProgressDashboard = () => {
         const config = {
           headers: { 'Authorization': `Bearer ${token}` }
         };
-        const response = await axios.get('${API_BASE_URL}/users/progress', config);
+        const response = await axios.get(`${API_BASE_URL}/users/progress`, config);
         setProgress(response.data);
         setLoading(false);
       } catch (err) {
