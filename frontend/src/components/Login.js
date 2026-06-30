@@ -15,7 +15,7 @@ const Login = ({ switchToSignup, setUser }) => {
 
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/login/`,
+        `${API_BASE_URL}/login`,
         new URLSearchParams({
           username: email,
           password: password,
