@@ -157,7 +157,7 @@ const AdminDashboard = () => {
             <Card bg="light" text="dark" className="mb-2">
               <Card.Header>System Question Count</Card.Header>
               <Card.Body>
-                <Card.Title>—</Card.Title> {/* Placeholder for Question Count */}
+                <Card.Title>{stats.total_questions}</Card.Title> {/* Placeholder for Question Count */}
               </Card.Body>
             </Card>
           </Col>
@@ -204,9 +204,8 @@ const AdminDashboard = () => {
         </Modal.Header>
         <Modal.Body>
           <p>
-            Enter a topic, and the system will generate 250 MCQs and Scenario-Based questions, 
-            run the ML predictor to assign their difficulty level automatically.
-          </p>
+            Enter a topic, and the system will generate 10 MCQs and Scenario-Based questions, 
+            run the ML predictor to assign their difficulty level automatically.For testing purposes, you can use topics like "FastAPI and Database Design" or "Python OOP Concepts".the question limit is set to 10.          </p>
           <Form onSubmit={(e) => { e.preventDefault(); handleGenerateQuestions(); }}>
             <Form.Group className="mb-3">
               <Form.Label><strong>Topic</strong></Form.Label>
