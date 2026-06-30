@@ -16,7 +16,7 @@ const ScenarioQuestion = ({ question, onNextQuestion }) => {
 
       try {
         const response = await axios.post(
-          `${API_BASE_URL}/${question.id}/answer`,
+          `${API_BASE_URL}/questions/${question.id}/answer`,
           { answer: answer },
           {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
