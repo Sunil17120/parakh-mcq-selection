@@ -28,7 +28,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { 'Authorization': `Bearer ${token}` } };
-      const response = await axios.get('${API_BASE_URL}/admin/stats', config);
+      const response = await axios.get(`${API_BASE_URL}/admin/stats`, config);
       setStats(response.data);
     } catch (err) {
       console.error("Fetch Stats Error:", err);
